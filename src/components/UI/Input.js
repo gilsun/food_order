@@ -1,6 +1,10 @@
-/* eslint-disable no-unreachable */
-import classes from './Input.module.css'
-const Input=props =>{
-  return 
-}
-export default Input
+import classes from "./Input.module.css";
+const Input = (props) => {
+  return (
+    <div className={classes.input}>
+      <lable htmlFor={props.input.id}>{props.label}</lable>
+      <input {...props.input} />
+    </div>
+  );
+};
+export default Input;
