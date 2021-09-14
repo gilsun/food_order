@@ -1,3 +1,4 @@
+import MealItemForm from './MealItemForm';
 import React from 'react';
 
 const MealItem = (props) => {
@@ -10,7 +11,7 @@ const MealItem = (props) => {
       <div>{price}</div>
     </div>
     <div>
-      
+      <MealItemForm />
     </div>
 
   </li>
