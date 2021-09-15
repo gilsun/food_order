@@ -1,13 +1,31 @@
-
+import { useRef, useState } from "react";
 import classes from "./MealItemForm.module.css";
 import Input from "../../UI/Input";
 const MealItemForm = (props) => {
+  const [amountIsvalid, setAmountIsvalid] = useState(true);
+
+  const amontInputRef = useRef();
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const enteredAmount = amontInputRef.current.value;
+    const enteredAmountNumber = +enteredAmount;
+    if (
+      enteredAmount.trim().length === 0 ||
+      enteredAmountNumber < 1 ||
+      enteredAmountNumber > 5
+    ) {
+      setAmountIsvalid(false);
+      return;
+    }
+    props.onAddToCart(enteredAmountNumber);
+  };
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={submitHandler}>
       <Input
+        ref={amontInputRef}
         label="Amount"
         input={{
-          id: "amount"+props.id,
+          id: "amount" + props.id,
           type: "number",
           min: "1",
           max: "5",
@@ -16,9 +34,9 @@ const MealItemForm = (props) => {
         }}
       />
       <button>+Add</button>
+      {!amountIsvalid && <p> Please enter a valid amount (1-5).</p>}
     </form>
   );
 };
-
 
 export default MealItemForm;
